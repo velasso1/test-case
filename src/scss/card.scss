@@ -1,3 +1,16 @@
-.card__image {
-  fill: #39cc94;
+.card {
+  &__picture {
+    width: 25px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__garbage {
+    width: 25px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
