@@ -1,0 +1,10 @@
+.card-list {
+    display: grid;
+    gap: 40px;
+    grid-template-areas: ". . . .";
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    padding: 50px 0;
+}

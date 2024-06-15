@@ -12,7 +12,7 @@ const Like: FC = () => {
     <>
       <img
         onClick={() => colorHandler()}
-        className="card__picture"
+        className="card__like"
         src={LikeImage}
         alt="like"
         style={{ filter: `saturate(${color}%)` }}

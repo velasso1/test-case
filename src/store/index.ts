@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import pictures from "./slices/pictures-slice";
 
 const rootReducer = combineReducers({
-  picturtes: pictures,
+  pictures: pictures,
 });
 
 const resultConfigureStore = configureStore({
@@ -13,5 +13,6 @@ const resultConfigureStore = configureStore({
 
 export default resultConfigureStore;
 
+export type RootState = ReturnType<typeof resultConfigureStore.getState>; 
 export type AppDispatch = typeof resultConfigureStore.dispatch;
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
