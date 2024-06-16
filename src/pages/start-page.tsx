@@ -4,7 +4,6 @@ import { getPictures } from "../store/slices/pictures-slice";
 import CardList from "../components/card-list";
 
 const StartPage: FC = () => {
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {

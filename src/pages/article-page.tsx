@@ -1,29 +1,40 @@
 import { FC, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch } from "../store";
-import { getCurrentPicture } from "../store/slices/pictures-slice";
-import { RootState } from "@reduxjs/toolkit/query";
+
+import { useAppDispatch, useAppSelector } from "../store";
+import {
+  getCurrentPicture,
+  clearOnePicture,
+} from "../store/slices/pictures-slice";
+
 import CurrentArticle from "../components/current-article";
-import { useSelector } from "react-redux";
 
 const ArticlePage: FC = () => {
+  const { pictureId } = useParams<{ pictureId: string }>();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-    const {id} = useParams<{id?: string}>();
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (pictureId) {
+      dispatch(getCurrentPicture(pictureId));
+    }
+  }, [dispatch, pictureId]);
 
-    useEffect(() => {
-        // dispatch(getCurrentPicture(id));
-    }, [dispatch, id])
+  const { id, urls, alt_description } = useAppSelector(
+    (state) => state.pictures.currentPicture
+  );
 
-    // const cardInfo = useSelector((state: RootState) => state.pictures.currentPicture);
+  const returnHandler = (): void => {
+    navigate("/");
+    dispatch(clearOnePicture());
+  };
 
-    return (
+  return (
     <>
-     <button onClick={() => navigate('/')}>Вернуться</button>
-        {/* <CurrentArticle /> */}
+      <button onClick={() => returnHandler()}>Вернуться</button>
+      <CurrentArticle id={id} urls={urls} alt_description={alt_description} />
     </>
-    );
-}
- 
+  );
+};
+
 export default ArticlePage;

@@ -1,0 +1,43 @@
+.current-article {
+    padding: 70px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+
+    &__picture {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+    }
+
+    &__text {
+        width: 500px;
+        height: 500px;
+        text-align: center;
+    }
+
+    &__title {
+
+        vertical-align: top;
+        font-size: 20px;
+        padding: 20px;
+
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
+
+    &__about-picture {
+        padding: 0px 10px;
+        font-size: 15px;
+        text-align: justify;
+    }
+
+    &__id {
+        text-align: center;
+        padding: 5px 0;
+        color: #ccc;
+    }
+}

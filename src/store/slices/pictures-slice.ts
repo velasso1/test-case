@@ -1,21 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IinitialState } from "../../types/pictures-slice-state";
 import { AppDispatch } from "../index.ts";
+import { ICardProps } from "../../types/card-props.tsx";
 
-const initialState = {
+interface IPictureState {
+  pictures: ICardProps[],
+  currentPicture: ICardProps,
+}
+
+const initialState: IPictureState = {
   pictures: [],
-  currentPicture: '',
+  currentPicture: {
+    id: '',
+    urls: {
+      full: '',
+      raw: '',
+      regular: '',
+    },
+    alt_description: '',
+  },
 };
 
 const pictures = createSlice({
   name: "pictures",
   initialState,
   reducers: {
-    picturesReceived(state: IinitialState, action: PayloadAction<object[]>) {
+    picturesReceived(state: IPictureState, action: PayloadAction<ICardProps[]>) {
       state.pictures = action.payload;
     },
-    alonePictureReceived(state: IinitialState, action: PayloadAction<string>) {
+    onePictureReceived(state: IPictureState, action: PayloadAction<ICardProps>) {
       state.currentPicture = action.payload;
+    },
+    clearOnePicture(state: IPictureState) {
+      state.currentPicture = initialState.currentPicture;
     }
   },
 });
@@ -31,19 +47,20 @@ export const getPictures = () => {
     ).then((resp) =>
       resp.json().then((data) => dispatch(picturesReceived(data)))
     );
-  };
+  };  
 };
 
+// get one picture by id
 export const getCurrentPicture = (id: string) => {
   return async (dispatch: AppDispatch): Promise<void> => {
     await fetch(`https://api.unsplash.com/photos/${id}/?client_id=${
       import.meta.env.VITE_API_KEY
     }`
   ).then((resp) => 
-    resp.json().then((data) => dispatch(alonePictureReceived(data))))
+    resp.json().then((data) => dispatch(onePictureReceived(data))))
   }
 }
 
-export const { picturesReceived, alonePictureReceived } = pictures.actions;
+export const { picturesReceived, onePictureReceived, clearOnePicture } = pictures.actions;
 
 export default pictures.reducer;
