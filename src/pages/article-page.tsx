@@ -31,7 +31,11 @@ const ArticlePage: FC = () => {
 
   return (
     <>
-      <button onClick={() => returnHandler()}>Вернуться</button>
+      <div className="back-button">
+        <button className="return-button" onClick={() => returnHandler()}>
+          &#8592; Вернуться
+        </button>
+      </div>
       <CurrentArticle id={id} urls={urls} alt_description={alt_description} />
     </>
   );

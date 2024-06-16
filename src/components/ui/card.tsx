@@ -25,8 +25,8 @@ const Card: FC<ICardProps> = ({ id, urls, alt_description }) => {
       </div>
       <div className="card__about">{alt_description}</div>
       <div className="card__interactive">
-        <Garbage />
-        <Like />
+        <Garbage id={id} />
+        <Like id={id} />
       </div>
     </div>
   );

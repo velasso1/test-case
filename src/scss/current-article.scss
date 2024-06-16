@@ -1,10 +1,9 @@
 .current-article {
-    padding: 70px 0 0 0;
+    // padding: 70px 0 0 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-family: 'Open Sans', sans-serif;
 
     &__picture {
         width: 500px;
@@ -39,5 +38,29 @@
         text-align: center;
         padding: 5px 0;
         color: #ccc;
+    }
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+
+    .return-button {
+    margin: 0 auto;
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    }
+}
+
+// responsive design
+
+@media screen and (max-width: 992px) {
+    .current-article {
+        flex-direction: column;
     }
 }

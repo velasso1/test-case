@@ -4,11 +4,13 @@ import { ICardProps } from "../../types/card-props.tsx";
 
 interface IPictureState {
   pictures: ICardProps[],
+  likedPictures: string[],
   currentPicture: ICardProps,
 }
 
 const initialState: IPictureState = {
   pictures: [],
+  likedPictures: [],
   currentPicture: {
     id: '',
     urls: {
@@ -32,6 +34,19 @@ const pictures = createSlice({
     },
     clearOnePicture(state: IPictureState) {
       state.currentPicture = initialState.currentPicture;
+    },
+    likePicture(state: IPictureState, action: PayloadAction<string>) {
+      if (!state.likedPictures.includes(action.payload)) {
+        state.likedPictures.push(action.payload);
+      } else {
+        state.likedPictures = state.likedPictures.filter((item) => item !== action.payload);
+      }
+    },
+    deleteCard(state: IPictureState, action: PayloadAction<string>) {
+      state.pictures = state.pictures.filter((item) => item.id !== action.payload);
+    },
+    addNewPictures(state: IPictureState, action: PayloadAction<{results: ICardProps[]}>) {
+      state.pictures.push(...action.payload.results);
     }
   },
 });
@@ -61,6 +76,15 @@ export const getCurrentPicture = (id: string) => {
   }
 }
 
-export const { picturesReceived, onePictureReceived, clearOnePicture } = pictures.actions;
+export const getMorePictures = (count: number) => {
+  return async (dispatch: AppDispatch): Promise<void> => {
+    await fetch (`https://api.unsplash.com/search/photos?query=nature&page=${count}&client_id=${
+      import.meta.env.VITE_API_KEY
+    }`
+  ).then((resp) => resp.json().then((data) => dispatch(addNewPictures(data))));
+  }
+}
+
+export const { picturesReceived, onePictureReceived, clearOnePicture, likePicture, deleteCard, addNewPictures } = pictures.actions;
 
 export default pictures.reducer;
