@@ -11,7 +11,10 @@ const Card: FC<ICardProps> = ({ id, urls, alt_description }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="card" onClick={() => navigate(`/current-card/${id}`)}>
+    <div
+      className="card"
+      onClick={() => navigate(`/test-alfa-preview/current-card/${id}`)}
+    >
       <div className="card__id">ID: {id}</div>
       <div className="card__image">
         <img

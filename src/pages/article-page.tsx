@@ -25,7 +25,7 @@ const ArticlePage: FC = () => {
   );
 
   const returnHandler = (): void => {
-    navigate("/");
+    navigate("/test-alfa-preview");
     dispatch(clearOnePicture());
   };
 

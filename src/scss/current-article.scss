@@ -18,7 +18,7 @@
     }
 
     &__title {
-
+        font-weight: 700;
         vertical-align: top;
         font-size: 20px;
         padding: 20px;
@@ -62,5 +62,38 @@
 @media screen and (max-width: 992px) {
     .current-article {
         flex-direction: column;
+
+        &__picture {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+        }
+    }
+}
+
+@media screen and (max-width: 430px) {
+
+    .current-article {
+
+        &__text {
+            width: 280px;
+            
+        }
+
+        &__picture {
+            width: 280px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        &__title {
+            font-size: 15px;
+            width: 280px;
+        }
+
+        &__about-picture {
+            width: 280px;
+            text-align: justify;
+        }
     }
 }
